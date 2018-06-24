@@ -16,11 +16,11 @@ const handleTrainIntent = async (conv) => {
   console.log(predictionText)
   console.log(alertText)
 
-  // conv.close(`
-  //   <speak>
-  //     ${predictionText} ${predictionText}
-  //   </speak>
-  // `);
+  conv.close(`
+    <speak>
+      ${predictionText} ${predictionText}
+    </speak>
+  `);
 }
 
 module.exports = {
