@@ -12,17 +12,23 @@
     "shell": "firebase experimental:functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "compile": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist",
+    "practice": "npm run compile && npm run lint && PRACTICE_LOCAL=true node dist/index.js"
   },
   "dependencies": {
     "actions-on-google": "^2.2.0",
+    "babel-polyfill": "^6.26.0",
     "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.1.0",
     "node-fetch": "^2.1.2",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^5.0.0",
     "eslint-plugin-promise": "^3.6.0"
-  }
+  },
+  "eslintIgnore": ["dist/"]
 }

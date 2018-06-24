@@ -1,5 +1,5 @@
 // import node module dependencies
-const parseString = require('xml2js').parseString;
+import { parseString } from 'xml2js';
 
 function parseXML(xmlData) {
   return new Promise((resolve, reject) => {
@@ -22,11 +22,11 @@ function parseJSON(jsonData) {
 
   // can be multiple trainTypes for 4th and irving. i.e `Inbound to Caltrain/Ball Park`
   // and `Inbound to Caltrain/Ball Park`. Combine all predictiions for all trainTypes.
-  for (trainType of trainTypes) {
+  for (let trainType of trainTypes) {
     let { prediction: trainPredictions } = trainType;
 
     // loop through trainPredictions of the train type add prediction to `unsortedPredictions` array
-    for (prediction of trainPredictions) {
+    for (let prediction of trainPredictions) {
       const minutesTo4thAndIrving = parseInt(prediction.$.minutes);
       unsortedPredictions.push(minutesTo4thAndIrving);
     }
