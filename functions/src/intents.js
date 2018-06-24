@@ -1,9 +1,18 @@
 // import node module dependencies
 import fetch from 'node-fetch';
+import twilio from 'twilio';
 
-// import parser and formater functions
+// import parser and formater functions, as well as secrets
 import { parseXML, parseJSON } from './parsers';
 import { formatTrainResponse } from './formatters';
+import { twilioInfo } from '../secrets';
+
+const {
+  accountSid,
+  authToken,
+  fromNumber,
+  recipientPhoneNumbers
+} = twilioInfo;
 
 export const handleTrainIntent = async (conv) => {
   try {
@@ -24,6 +33,39 @@ export const handleTrainIntent = async (conv) => {
     } else {
       conv.close(textToSend);
     }
+  } catch(e) {
+    console.log(e);
+    conv.close(`
+      <speak>
+        Sorry! Something went wrong!
+      </speak>
+    `);
+  }
+}
+
+export const handleFindPhoneIntent = async (conv, { name = 'Brandon' }) => {
+  try {
+    const client = twilio(accountSid, authToken);
+    const callConfig = {
+      url: 'http://demo.twilio.com/docs/voice.xml',
+      to: recipientPhoneNumbers[name.toUpperCase()],
+      from: fromNumber
+    };
+
+    const textToSend = `
+      <speak>
+        Ok! Calling ${name}'s phone.
+      </speak>
+    `;
+
+    if (process.env.DEV) {
+      console.log(textToSend)
+    } else {
+      conv.close(textToSend);
+    }
+
+    const call = await client.calls.create(callConfig);
+    console.log(call.sid);
   } catch(e) {
     console.log(e);
     conv.close(`
