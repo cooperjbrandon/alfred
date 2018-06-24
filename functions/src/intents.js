@@ -14,15 +14,13 @@ const handleTrainIntent = async (conv) => {
     const { predictions, alerts } = await parseJSON(jsonData);
     const { predictionText, alertText } = await formatTrainResponse(predictions, alerts);
 
-    console.log(predictionText)
-    console.log(alertText)
-
     conv.close(`
       <speak>
-        ${predictionText} ${predictionText}
+        ${predictionText} ${alertText}
       </speak>
     `);
   } catch(e) {
+    console.log(e);
     conv.close(`
       <speak>
         Sorry! Something went wrong!
