@@ -36,7 +36,7 @@ function parseJSON(jsonData) {
   const predictions = unsortedPredictions.sort((a, b) => a - b).slice(0, 4);
 
   // also, filter for messages of priority `High`.
-  const alerts = messages.filter(m => m.$.priority === 'Normal').map(m => m.$.text);
+  const alerts = messages.filter(m => m.$.priority === 'High').map(m => m.$.text);
 
   return { predictions, alerts };
 }
