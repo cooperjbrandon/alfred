@@ -1,0 +1,28 @@
+{
+  "name": "alfred",
+  "description": "Command helpers for my house",
+  "author": "Brandon Cooper",
+  "private": false,
+  "engines": {
+    "node": "8.11.1"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "actions-on-google": "^2.2.0",
+    "firebase-admin": "^5.12.1",
+    "firebase-functions": "^1.1.0",
+    "node-fetch": "^2.1.2",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.0",
+    "eslint-config-google": "^0.9.1"
+  }
+}
