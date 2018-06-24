@@ -1,7 +1,6 @@
 const parseString = require('xml2js').parseString;
 
 function parseXML(xmlData) {
-  console.log(xmlData);
   return new Promise((resolve, reject) => {
     parseString(xmlData, function (err, result) {
       if (err) {
@@ -9,7 +8,6 @@ function parseXML(xmlData) {
         reject(err);
       } else {
         console.log('success parsing xml');
-        console.log(JSON.stringify(result, null, 1));
         resolve(result);
       }
     });
@@ -17,11 +15,32 @@ function parseXML(xmlData) {
 }
 
 function parseJSON(jsonData) {
-  const { direction, message } = jsonData.body.predictions[0];
+  const { direction: trainTypes, message: messages } = jsonData.body.predictions[0];
 
-  // can be multiple directions for 4th and irving. i.e `Inbound to Caltrain/Ball Park`
-  // and `Inbound to Caltrain/Ball Park`. Combine top 4 predictions for all directions.
-  const
+  const unsortedPredictions = [];
 
-  // also, check for messages of priority `High`.
+  // can be multiple trainTypes for 4th and irving. i.e `Inbound to Caltrain/Ball Park`
+  // and `Inbound to Caltrain/Ball Park`. Combine all predictiions for all trainTypes.
+  for (trainType of trainTypes) {
+    let { prediction: trainPredictions } = trainType;
+
+    // loop through trainPredictions of the train type add prediction to `unsortedPredictions` array
+    for (prediction of trainPredictions) {
+      const minutesTo4thAndIrving = parseInt(prediction.$.minutes);
+      unsortedPredictions.push(minutesTo4thAndIrving);
+    }
+  }
+
+  // sort `unsortedPredictions` by earliest prediction to latest prediction and return the earliest 4 predictions
+  const predictions = unsortedPredictions.sort((a, b) => a - b).slice(0, 4);
+
+  // also, filter for messages of priority `High`.
+  const alerts = messages.filter(m => m.$.priority === 'Normal').map(m => m.$.text);
+
+  return { predictions, alerts };
 }
+
+module.exports = {
+  parseXML,
+  parseJSON
+};
