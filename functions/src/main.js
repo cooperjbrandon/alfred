@@ -11,8 +11,8 @@ import { handleTrainIntent, handleFindPhoneIntent } from './intents';
 
 export function runLocal() {
   // manually run `handleTrainIntent`
-  // handleTrainIntent();
-  handleFindPhoneIntent(null, {});
+  handleTrainIntent();
+  // handleFindPhoneIntent(null, {});
 }
 
 export function runProd() {
