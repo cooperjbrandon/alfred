@@ -59,13 +59,9 @@ var handleTrainIntent = function () {
             console.log(predictionText);
             console.log(alertText);
 
-            // conv.close(`
-            //   <speak>
-            //     ${predictionText} ${predictionText}
-            //   </speak>
-            // `);
+            conv.close('\n    <speak>\n      ' + predictionText + ' ' + predictionText + '\n    </speak>\n  ');
 
-          case 22:
+          case 23:
           case 'end':
             return _context.stop();
         }
