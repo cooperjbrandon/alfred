@@ -1,3 +1,4 @@
+// import node module dependencies
 const parseString = require('xml2js').parseString;
 
 function parseXML(xmlData) {
