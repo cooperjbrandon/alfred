@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 import { parseXML, parseJSON } from './parsers';
 import { formatTrainResponse } from './formatters';
 
-const handleTrainIntent = async (conv) => {
+export const handleTrainIntent = async (conv) => {
   try {
     const url = 'http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r=N&s=5120';
     const res = await fetch(url);
@@ -33,7 +33,3 @@ const handleTrainIntent = async (conv) => {
     `);
   }
 }
-
-module.exports = {
-  handleTrainIntent
-};

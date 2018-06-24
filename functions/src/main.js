@@ -9,12 +9,12 @@ import { https } from 'firebase-functions';
 // import intents
 import { handleTrainIntent } from './intents';
 
-function runLocal() {
+export function runLocal() {
   // manually run `handleTrainIntent`
   handleTrainIntent();
 }
 
-function runProd() {
+export function runProd() {
   // Instantiate the Dialogflow client.
   const app = dialogflow({debug: true});
 
@@ -24,9 +24,4 @@ function runProd() {
 
   // This will set the DialogflowApp object to handle the HTTPS POST request.
   return https.onRequest(app);
-}
-
-module.exports = {
-  runLocal,
-  runProd
 }

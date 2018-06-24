@@ -1,7 +1,7 @@
 // import node module dependencies
 import { parseString } from 'xml2js';
 
-function parseXML(xmlData) {
+export function parseXML(xmlData) {
   return new Promise((resolve, reject) => {
     parseString(xmlData, (err, result) => {
       if (err) {
@@ -15,7 +15,7 @@ function parseXML(xmlData) {
   });
 }
 
-function parseJSON(jsonData) {
+export function parseJSON(jsonData) {
   const { direction: trainTypes, message: messages } = jsonData.body.predictions[0];
 
   const unsortedPredictions = [];
@@ -40,8 +40,3 @@ function parseJSON(jsonData) {
 
   return { predictions, alerts };
 }
-
-module.exports = {
-  parseXML,
-  parseJSON
-};
