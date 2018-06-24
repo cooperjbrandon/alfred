@@ -2,7 +2,7 @@
   "name": "alfred",
   "description": "Command helpers for my house",
   "author": "Brandon Cooper",
-  "private": false,
+  "private": true,
   "engines": {
     "node": "8.11.1"
   },
@@ -23,6 +23,6 @@
   },
   "devDependencies": {
     "eslint": "^5.0.0",
-    "eslint-config-google": "^0.9.1"
+    "eslint-plugin-promise": "^3.6.0"
   }
 }

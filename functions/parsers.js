@@ -2,7 +2,7 @@ const parseString = require('xml2js').parseString;
 
 function parseXML(xmlData) {
   return new Promise((resolve, reject) => {
-    parseString(xmlData, function (err, result) {
+    parseString(xmlData, (err, result) => {
       if (err) {
         console.log('Error parsing xml');
         reject(err);
