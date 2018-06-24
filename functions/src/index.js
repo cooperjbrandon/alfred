@@ -1,10 +1,10 @@
-import "babel-polyfill"; // required for async/await :(
+import 'babel-polyfill'; // required for async/await :(
 
 // Import the Dialogflow module from the Actions on Google client library.
 import { dialogflow } from 'actions-on-google';
 
 // Import the firebase-functions package for deployment.
-import functions from 'firebase-functions';
+import { https } from 'firebase-functions';
 
 // import intents
 import { handleTrainIntent } from './intents';
@@ -16,9 +16,9 @@ const app = dialogflow({debug: true});
 // The intent just returns the next inbound N for 4th and Irving, as well as any alerts.
 app.intent('train', handleTrainIntent);
 
-if (process.env.PRACTICE_LOCAL) {
+if (process.env.DEV) {
   handleTrainIntent();
 } else {
   // Set the DialogflowApp object to handle the HTTPS POST request.
-  exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
+  exports.dialogflowFirebaseFulfillment = https.onRequest(app);
 }

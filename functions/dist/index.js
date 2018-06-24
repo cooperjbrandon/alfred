@@ -6,11 +6,7 @@ var _actionsOnGoogle = require('actions-on-google');
 
 var _firebaseFunctions = require('firebase-functions');
 
-var _firebaseFunctions2 = _interopRequireDefault(_firebaseFunctions);
-
 var _intents = require('./intents');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Instantiate the Dialogflow client.
 
@@ -28,9 +24,9 @@ var app = (0, _actionsOnGoogle.dialogflow)({ debug: true });
 // Import the Dialogflow module from the Actions on Google client library.
 app.intent('train', _intents.handleTrainIntent);
 
-if (process.env.PRACTICE_LOCAL) {
+if (!process.env.DEV) {
   (0, _intents.handleTrainIntent)();
 } else {
   // Set the DialogflowApp object to handle the HTTPS POST request.
-  exports.dialogflowFirebaseFulfillment = _firebaseFunctions2.default.https.onRequest(app);
+  exports.dialogflowFirebaseFulfillment = _firebaseFunctions.https.onRequest(app);
 }

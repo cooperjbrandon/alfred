@@ -14,7 +14,7 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
     "compile": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist",
-    "practice": "npm run compile && npm run lint && PRACTICE_LOCAL=true node dist/index.js"
+    "practice": "npm run compile && npm run lint && DEV=true node dist/index.js"
   },
   "dependencies": {
     "actions-on-google": "^2.2.0",
