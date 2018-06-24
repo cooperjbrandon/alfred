@@ -45,3 +45,7 @@ Then, every time you want to deploy, run
 ```
 firebase deploy
 ```
+
+### Other
+
+Next bus api: https://www.nextbus.com/xmlFeedDocs/NextBusXMLFeed.pdf
