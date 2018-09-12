@@ -1,6 +1,6 @@
 # Alfred
 
-Some person firebase/google functions for my personal google home. Each `intent` is something you want google home to do.
+Some firebase/google functions for my personal google home. Each `intent` is something you want google home to do.
 * intent: `train`: tells me when the next 4 inbound N's are at 4th and Irving
 * intent: `findPhone`: calls your phone when you can't find it
 
